@@ -1,68 +1,133 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --background: 210 50% 98%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 201 100% 40%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 187 100% 34%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 187 100% 34%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
   }
-  a:hover {
-    color: #747bff;
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
-  button {
-    background-color: #f9f9f9;
+
+  * {
+    @apply border-border scroll-smooth;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-opensans text-foreground;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat font-semibold;
+  }
+
+  .section-container {
+    @apply min-h-screen w-full px-4 md:px-8 lg:px-12 py-16 pt-24 transition-all duration-300;
+  }
+
+  .prose-content {
+    @apply max-w-3xl mx-auto leading-relaxed;
+  }
+
+  .hover-card {
+    @apply bg-white shadow-md rounded-lg transition-all duration-300 overflow-hidden hover:shadow-xl;
+  }
+  
+  .hover-card:hover {
+    @apply -translate-y-1;
+  }
+
+  .animated-underline {
+    @apply relative inline-block;
+  }
+  
+  .animated-underline::after {
+    @apply content-[''] absolute w-0 h-0.5 bg-accent-teal left-0 bottom-0 transition-all duration-300;
+  }
+  
+  .animated-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Counter animations for stats */
+  .stat-counter {
+    counter-reset: stat-counter 0;
+    animation: counter 2s forwards ease-out;
+  }
+  
+  .stat-counter::after {
+    content: counter(stat-counter) "%";
+  }
+  
+  @keyframes counter {
+    from {
+      counter-increment: stat-counter 0;
+    }
+    to {
+      counter-increment: stat-counter var(--target-value);
+    }
   }
 }
